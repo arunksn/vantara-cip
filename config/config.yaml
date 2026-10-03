@@ -1,0 +1,167 @@
+# Central configuration. No paths, hyperparameters or thresholds are hard-coded in scripts.
+project:
+  name: customer-behavior-prediction
+  seed: 42
+  data_label: "UCI Online Retail II"
+
+paths:
+  raw_dir: data/raw
+  raw_xlsx: data/raw/online_retail_II.xlsx
+  raw_cache: data/raw/online_retail_II_ucimlrepo.csv.gz
+  interim_dir: data/interim
+  processed_dir: data/processed
+  clean_transactions: data/interim/transactions_clean.csv.gz
+  cleaning_report: data/interim/cleaning_report.json
+  features_train: data/processed/customer_features_train.csv
+  features_scoring: data/processed/customer_features_scoring.csv
+  artifacts_dir: models_artifacts
+  figures_dir: docs/figures
+  docs_dir: docs
+
+data:
+  uci_id: 502
+  sheets: ["Year 2009-2010", "Year 2010-2011"]
+  expected_date_min: "2009-12-01"
+  expected_date_max: "2011-12-09 23:59:59"
+  required_columns: [invoice, stock_code, description, quantity, invoice_date, unit_price, customer_id, country]
+  # Admin / non-product StockCodes (postage, bank charges, manual entries, ...). Case-insensitive regex.
+  admin_stockcode_regex: "^(POST|DOT|M|BANK CHARGES|ADJUST2?|AMAZONFEE|B|S|D|C2|CRUK|TEST\\d+|SP1002|PADS|GIFT_.*)$"
+  # Optional manual description fixes {WRONG: RIGHT}; applied after case/whitespace normalisation.
+  known_description_typos: {}
+  iqr_multiplier: 3.0
+  entry_error_abs_quantity: 50000
+  # Validation thresholds (fail loudly if violated)
+  max_null_rate:
+    customer_id: 0.40
+    description: 0.05
+    invoice_date: 0.0
+    quantity: 0.0
+    unit_price: 0.0
+  max_nonpositive_price_rate: 0.02
+
+features:
+  churn_horizon_days: 90
+  clv_horizon_days: 90
+  trend_window_bins: 12
+  trend_bin_days: 30
+  discount_threshold: 0.10        # line priced >=10% below the SKU median counts as discounted
+  top_countries: 5
+  vif_threshold: 10.0
+  vif_protected: [recency_days, frequency]
+  category_rules:                  # first match wins; anything unmatched -> "other"
+    lighting: [LIGHT, LAMP, CANDLE, LANTERN, TEALIGHT]
+    kitchen_dining: [MUG, CUP, TEAPOT, PLATE, BOWL, CAKE, JAR, TIN, SPOON, BOTTLE, KITCHEN, APRON, LUNCH, TRAY, COASTER, EGG]
+    bags_storage: [BAG, BOX, BASKET, CASE, TOTE, PURSE, STORAGE, CRATE, TRUNK]
+    christmas_seasonal: [CHRISTMAS, XMAS, SANTA, ADVENT, SNOWFLAKE, EASTER, REINDEER]
+    stationery_cards: [CARD, PAPER, NOTEBOOK, PENCIL, PEN, STICKER, WRAP, RIBBON, GIFT, TAG, ENVELOPE]
+    toys_games: [TOY, GAME, PUZZLE, DOLL, PLAYING, DOMINO, BALLOON, PARTY, JIGSAW]
+    garden_outdoor: [GARDEN, BIRD, FLOWER, PLANT, SEED, WATERING, WINDMILL]
+    jewelry_accessories: [NECKLACE, BRACELET, EARRING, RING, BEAD, JEWELL, HAIR, SCARF, UMBRELLA]
+    bath_beauty: [SOAP, BATH, TOWEL, SPONGE, SPA, MASSAGE]
+    home_decor: [FRAME, CUSHION, HEART, SIGN, CLOCK, MIRROR, VASE, DOORMAT, WALL, HOOK, HANGING]
+  sequence_max_len: 20
+
+split:
+  train: 0.70
+  val: 0.15
+  test: 0.15
+
+imbalance:
+  method: class_weight             # class_weight | smote  (applied to training data only)
+  min_recall_target: 0.70          # operating threshold chosen on the validation set
+
+cv:
+  folds: 5
+  scoring: roc_auc
+  n_iter: 8
+
+models:
+  logistic_regression:
+    C: [0.01, 0.1, 1.0, 10.0]
+    l1_ratio: [0.0, 1.0]           # 0.0 = L2 (Ridge) penalty, 1.0 = L1 (Lasso) penalty
+  decision_tree:
+    max_depth: [3, 5, 8, 12]
+    min_samples_leaf: [5, 20, 50]
+  random_forest:
+    n_estimators: [150, 250]
+    max_depth: [6, 10, 16]
+    min_samples_leaf: [2, 5, 10]
+  xgboost:
+    n_estimators: 600
+    early_stopping_rounds: 30
+    learning_rate: [0.03, 0.05, 0.1]
+    max_depth: [3, 4, 6]
+    subsample: [0.7, 0.85, 1.0]
+    colsample_bytree: [0.6, 0.8, 1.0]
+  lightgbm:
+    n_estimators: 600
+    early_stopping_rounds: 30
+    learning_rate: [0.03, 0.05, 0.1]
+    num_leaves: [15, 31, 63]
+    subsample: [0.7, 0.85, 1.0]
+    colsample_bytree: [0.6, 0.8, 1.0]
+  knn:
+    n_neighbors: [15, 25, 41, 61]
+    weights: [uniform, distance]
+  production_candidates: [random_forest, xgboost, lightgbm]   # tree models (SHAP-compatible)
+  clv:
+    ridge_alpha: [0.1, 1.0, 10.0, 100.0]
+    xgb_max_depth: [3, 4, 6]
+    xgb_learning_rate: [0.03, 0.05, 0.1]
+    xgb_n_estimators: [200, 400]
+  next_category:
+    n_estimators: 300
+    min_samples_leaf: 3
+
+deep_learning:
+  ann:
+    hidden_units: [128, 64]
+    dropout: 0.3
+    l1: 0.0
+    l2: 0.0001
+    learning_rate: 0.001
+    batch_size: 64
+    epochs: 150
+    patience: 12
+  lstm:
+    units: 32
+    embedding_dim: 4
+    dropout: 0.2
+    l2: 0.0001
+    learning_rate: 0.002
+    batch_size: 64
+    epochs: 100
+    patience: 10
+  autoencoder:
+    encoder_units: [16, 4]
+    learning_rate: 0.002
+    batch_size: 64
+    epochs: 150
+    patience: 12
+    anomaly_percentile: 99.0
+    features: [total_spend, avg_spend, avg_basket_size, frequency, historical_clv, return_rate, discount_sensitivity, gap_variance]
+  cv_epochs_cap: 40
+
+segmentation:
+  features: [recency_days, frequency, total_spend, avg_basket_size, return_rate, seasonal_concentration, discount_sensitivity]
+  log_features: [recency_days, frequency, total_spend, avg_basket_size]
+  k_min: 3
+  k_max: 8
+  secondary_algorithm: gmm         # gmm | dbscan
+  hierarchical_sample: 500
+  value_tiers: [Low, Medium, High]
+
+explainability:
+  background_size: 500
+  lime_num_samples: 1500
+  lime_num_features: 10
+  pdp_top_features: 3
+  top_reasons: 3
+
+serving:
+  risk_medium_ratio: 0.6           # Medium tier starts at 60% of the operating threshold
+  api_benchmark_requests: 200
+  max_batch_rows: 50000
+
+logging:
+  level: INFO
