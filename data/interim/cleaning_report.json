@@ -1,0 +1,51 @@
+{
+  "cleaning_version": "1.0.0",
+  "rows_in": 646649,
+  "exact_duplicates_removed": 1922,
+  "rows_missing_customer_id": 115919,
+  "outliers": {
+    "quantity_bounds_abs": [
+      -16.0,
+      26.0
+    ],
+    "price_bounds": [
+      -2.64,
+      6.67
+    ],
+    "n_outliers": 29343,
+    "n_entry_errors": 6,
+    "n_bulk_outliers": 29337
+  },
+  "rows_out": 644727,
+  "return_lines": 14601,
+  "price_adjustment_lines": 1281,
+  "admin_code_lines": 2563,
+  "rows_used_for_customer_model": 528802,
+  "unique_customers": 6000,
+  "raw_validation": {
+    "rows": 646649,
+    "null_rates": {
+      "customer_id": 0.17979305620205088,
+      "description": 0.0,
+      "invoice_date": 0.0,
+      "quantity": 0.0,
+      "unit_price": 0.0
+    },
+    "date_min": "2009-12-01 08:00:00.093689960",
+    "date_max": "2011-12-08 19:59:08.513348809",
+    "nonpositive_price_rate": 0.001980981954661648
+  },
+  "clean_validation": {
+    "rows": 644727,
+    "null_rates": {
+      "customer_id": 0.1797954793269089,
+      "description": 0.0,
+      "invoice_date": 0.0,
+      "quantity": 0.0,
+      "unit_price": 0.0
+    },
+    "date_min": "2009-12-01 08:00:00.093689960",
+    "date_max": "2011-12-08 19:59:08.513348809",
+    "nonpositive_price_rate": 0.0019868874733026537
+  }
+}
