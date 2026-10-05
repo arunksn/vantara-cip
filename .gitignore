@@ -1,0 +1,12 @@
+.env
+*.db
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/README.md
+*.egg-info/
+.venv/
