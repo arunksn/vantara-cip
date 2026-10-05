@@ -1,0 +1,24 @@
+[project]
+name = "customer-behavior-prediction"
+version = "1.0.0"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -p no:cacheprovider"
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning", "ignore::UserWarning"]
+
+[tool.coverage.run]
+source = ["src", "api"]
+
+[tool.ruff]
+line-length = 130
+extend-exclude = ["notebooks"]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501", "E741", "B008", "B905"]
+
+[tool.black]
+line-length = 130
