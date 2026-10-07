@@ -1,0 +1,156 @@
+{
+  "data_source": "SYNTHETIC STAND-IN (not real data)",
+  "synthetic": true,
+  "cutoffs": {
+    "train_cutoff": "2011-09-10 00:00:00",
+    "scoring_cutoff": "2011-12-09 00:00:00"
+  },
+  "model_features": [
+    "recency_days",
+    "frequency",
+    "historical_clv",
+    "avg_basket_size",
+    "freq_trend",
+    "gap_variance",
+    "seasonal_concentration",
+    "return_rate",
+    "discount_sensitivity",
+    "avg_product_popularity",
+    "engagement_score",
+    "affinity_lighting",
+    "affinity_kitchen_dining",
+    "affinity_bags_storage",
+    "affinity_christmas_seasonal",
+    "affinity_stationery_cards",
+    "affinity_toys_games",
+    "affinity_garden_outdoor",
+    "affinity_jewelry_accessories",
+    "affinity_bath_beauty",
+    "affinity_home_decor",
+    "country_Germany",
+    "country_France",
+    "country_EIRE",
+    "country_Netherlands",
+    "country_Other"
+  ],
+  "vif_dropped": [
+    "total_spend",
+    "avg_spend"
+  ],
+  "churn_rate_train_snapshot": 0.6052631578947368,
+  "n_customers_train": 5890,
+  "n_customers_scoring": 6000,
+  "run_id": "run_20261003_092511",
+  "production_model": "lightgbm",
+  "churn_threshold": 0.3175761938632258,
+  "production_cv_auc": 0.8663523819701696,
+  "feature_medians": {
+    "recency_days": 149.0,
+    "frequency": 5.0,
+    "historical_clv": 685.8,
+    "avg_basket_size": 55.13392857142857,
+    "freq_trend": -0.1433566433566433,
+    "gap_variance": 272.18397252417475,
+    "seasonal_concentration": 0.3333333333333333,
+    "return_rate": 0.0072467573386546,
+    "discount_sensitivity": 0.09353999894635405,
+    "avg_product_popularity": 0.10620136502762345,
+    "engagement_score": 50.5461233729485,
+    "affinity_lighting": 0.011710875789368452,
+    "affinity_kitchen_dining": 0.0155710565544884,
+    "affinity_bags_storage": 0.012090038575822599,
+    "affinity_christmas_seasonal": 0.01676569849960365,
+    "affinity_stationery_cards": 0.009646556269688699,
+    "affinity_toys_games": 0.01653295557616965,
+    "affinity_garden_outdoor": 0.01463554035396425,
+    "affinity_jewelry_accessories": 0.0090720710680212,
+    "affinity_bath_beauty": 0.01021603479040275,
+    "affinity_home_decor": 0.01111942569801715,
+    "country_Germany": 0.0,
+    "country_France": 0.0,
+    "country_EIRE": 0.0,
+    "country_Netherlands": 0.0,
+    "country_Other": 0.0
+  },
+  "seed": 42,
+  "ann_test_auc": 0.8601076506975873,
+  "lstm_test_auc": 0.7992287711217632,
+  "versions": {
+    "python": "3.12.3",
+    "pandas": "3.0.2",
+    "numpy": "2.4.4"
+  },
+  "trained_at": "2026-10-03T09:29:50+00:00",
+  "global_importance": [
+    {
+      "feature": "recency_days",
+      "mean_abs_shap": 1.0579479955129503
+    },
+    {
+      "feature": "engagement_score",
+      "mean_abs_shap": 0.28002870374519184
+    },
+    {
+      "feature": "frequency",
+      "mean_abs_shap": 0.1170638891178783
+    },
+    {
+      "feature": "freq_trend",
+      "mean_abs_shap": 0.10934272613620154
+    },
+    {
+      "feature": "gap_variance",
+      "mean_abs_shap": 0.10786864771426428
+    },
+    {
+      "feature": "historical_clv",
+      "mean_abs_shap": 0.08919768026303256
+    },
+    {
+      "feature": "seasonal_concentration",
+      "mean_abs_shap": 0.041218815320061816
+    },
+    {
+      "feature": "affinity_christmas_seasonal",
+      "mean_abs_shap": 0.033364612277146814
+    },
+    {
+      "feature": "affinity_bags_storage",
+      "mean_abs_shap": 0.030050926650346196
+    },
+    {
+      "feature": "discount_sensitivity",
+      "mean_abs_shap": 0.029292048474028238
+    },
+    {
+      "feature": "avg_product_popularity",
+      "mean_abs_shap": 0.029110853359658236
+    },
+    {
+      "feature": "affinity_bath_beauty",
+      "mean_abs_shap": 0.028791493294431533
+    },
+    {
+      "feature": "avg_basket_size",
+      "mean_abs_shap": 0.02113756843177116
+    },
+    {
+      "feature": "affinity_toys_games",
+      "mean_abs_shap": 0.01745130183481477
+    },
+    {
+      "feature": "affinity_jewelry_accessories",
+      "mean_abs_shap": 0.014109329401683518
+    }
+  ],
+  "production_test_metrics": {
+    "roc_auc": 0.868066304260504,
+    "recall": 0.8841121495327103,
+    "precision": 0.7936241610738255,
+    "f1": 0.8364279398762158,
+    "accuracy": 0.7907239819004525
+  },
+  "scored_customers": 6000,
+  "high_risk_customers": 3867,
+  "anomalies_flagged": 71
+}
