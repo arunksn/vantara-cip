@@ -1,0 +1,15 @@
+{
+  "api": {
+    "requests": 200,
+    "p50_ms": 42.28332100001353,
+    "p95_ms": 44.59169355013728,
+    "p99_ms": 46.86502801983578,
+    "method": "in-process TestClient, single worker (excludes network)"
+  },
+  "dashboard": {
+    "first_load_sec": 1.4016503729999386,
+    "cached_load_sec": 0.35607114399999773,
+    "exceptions": [],
+    "method": "Streamlit AppTest server-side script run (excludes browser rendering)"
+  }
+}

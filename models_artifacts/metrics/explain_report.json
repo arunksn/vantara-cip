@@ -1,0 +1,37 @@
+{
+  "top_features": [
+    "recency_days",
+    "engagement_score",
+    "frequency"
+  ],
+  "lime_vs_shap": {
+    "top_k": 5,
+    "shap_top": [
+      "recency_days",
+      "frequency",
+      "historical_clv",
+      "engagement_score",
+      "freq_trend"
+    ],
+    "lime_top": [
+      "recency_days",
+      "country_Netherlands",
+      "country_France",
+      "historical_clv",
+      "engagement_score"
+    ],
+    "overlap": [
+      "engagement_score",
+      "historical_clv",
+      "recency_days"
+    ],
+    "overlap_fraction": 0.6,
+    "sign_agreement": 0.7142857142857143
+  },
+  "example_explanation": "This customer is flagged as HIGH churn risk: predicted churn probability 32%, at or above the 32% operating threshold. Main drivers (relative to the average customer): days since last purchase = 71.00 (lower than typical) lowers the risk; number of orders = 1.00 (lower than typical) lowers the risk; net lifetime revenue = 101.84 (lower than typical) lowers the risk.",
+  "representative_customers": {
+    "low_risk": 650,
+    "high_risk": 718,
+    "borderline": 835
+  }
+}

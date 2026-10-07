@@ -1,0 +1,7 @@
+segment_id,segment_label,customers,share_pct,recency_days,frequency,total_spend,avg_spend,avg_basket_size,return_rate,seasonal_concentration,discount_sensitivity,engagement_score,mean_churn_probability,high_risk_pct
+0,At-Risk / Lapsing (A),512,8.5,297.301,4.709,547.666,119.372,57.17,0.018,0.471,0.499,38.749,0.694,80.078
+1,Loyal High-Value,456,7.6,192.217,11.211,7860.902,764.794,343.64,0.023,0.305,0.139,70.463,0.53,58.991
+2,Steady Mid-Value (A),1638,27.3,39.57,20.216,2648.497,129.895,57.872,0.026,0.191,0.144,82.064,0.214,13.675
+3,Steady Mid-Value,2211,36.8,270.865,6.195,828.906,144.024,63.514,0.017,0.33,0.099,47.695,0.702,84.441
+4,Seasonal Gift Shopper,818,13.6,412.482,1.924,174.24,102.318,45.269,0.004,0.796,0.071,19.267,0.839,95.599
+5,At-Risk / Lapsing,365,6.1,330.789,3.518,455.32,148.783,67.191,0.122,0.544,0.142,33.087,0.744,86.301

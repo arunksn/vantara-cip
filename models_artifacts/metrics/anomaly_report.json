@@ -1,0 +1,14 @@
+{
+  "threshold": 7.591876029968262,
+  "percentile": 99.0,
+  "flag_rate_train": 0.010189228529839884,
+  "flag_rate_val": 0.014705882352941176,
+  "flag_rate_test": 0.014705882352941176,
+  "n_flagged_test": 13,
+  "spearman_vs_mahalanobis": 0.3240276383151269,
+  "spearman_vs_isolation_forest": 0.20920369825274587,
+  "flagged_in_isolation_forest_top5pct": 0.07692307692307693,
+  "final_val_loss": 0.01881747879087925,
+  "expected_flag_rate": 0.010000000000000009,
+  "score": "mean over features of squared reconstruction error / training residual variance"
+}
